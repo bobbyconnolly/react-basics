@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding React.js</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --code-bg: #f5f5f5;
+            --border-color: #e0e0e0;
+            --text-color: #1f2937;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .language-toggle {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            text-align: center;
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .toggle-group label {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .toggle-group input:checked + span {
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .collapsible {
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .collapsible-header {
+            padding: 1rem;
+            cursor: pointer;
+            background: #f8fafc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .collapsible-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+        }
+
+        .collapsible.open .collapsible-content {
+            padding: 1rem;
+            max-height: 1000px;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .demo-col {
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .demo-button {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .demo-button:hover {
+            background-color: #1d4ed8;
+        }
+
+        @media (max-width: 640px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .black { color: var(--text-color); }
+        .keyword { color: #0550ae; }
+        .string { color: #0a7a00; }
+        .comment { color: #6b7280; }
+        .interpolation { color: #ff69b4; }
+
+        .diagram {
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        [data-lang] { display: none; }
+        [data-lang].active { display: block; }
+
+        .code-demo {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .code-demo .run-button {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .demo-output {
+            padding: 1rem;
+            background: white;
+            border: 1px solid var(--border-color);
+            margin-top: 0.5rem;
+        }
+
+        .demo-container {
+            padding: 1rem;
+            background: var(--code-bg);
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        #myDiv {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 4px;
+        }
+
+        [data-lang] { display: none; }
+        [data-lang].active { display: block; }
+
+        @media (max-width: 640px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            .demo-col {
+                border: none;
+                padding: 0;
+            }
+            .container {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-toggle">
+        <div class="toggle-group">
+            <label>
+                <input type="radio" name="language" value="en" checked>
+                <span>English</span>
+            </label>
+            <label>
+                <input type="radio" name="language" value="vi">
+                <span>Tiếng Việt</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="container">
+        <div data-lang="en">
+            <h1>Understanding React.js: A Visual Guide</h1>
+            <p>Let's explore React.js through interactive examples and visualizations!</p>
+        </div>
+        <div data-lang="vi">
+            <h1>Hiểu về React.js: Hướng Dẫn Trực Quan</h1>
+            <p>Hãy khám phá React.js thông qua các ví dụ và hình ảnh minh họa tương tác!</p>
+        </div>
+
+        <section>
+            <div data-lang="en">
+                <h2>The Document Object Model (DOM) 🌳</h2>
+                <p>Think of the DOM as a family tree for your webpage. Here's how it works:</p>
+            </div>
+            <div data-lang="vi">
+                <h2>Document Object Model (DOM) 🌳</h2>
+                <p>Hãy tưởng tượng DOM như một cây gia phả cho trang web của bạn. Đây là cách nó hoạt động:</p>
+            </div>
+
+            <svg class="diagram" viewBox="0 0 500 300">
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#4b5563"/>
+                    </marker>
+                </defs>
+                
+                <!-- document -->
+                <rect x="200" y="20" width="100" height="40" rx="5" fill="#e5e7eb"/>
+                <text x="250" y="45" text-anchor="middle">document</text>
+                
+                <!-- html -->
+                <rect x="200" y="100" width="100" height="40" rx="5" fill="#e5e7eb"/>
+                <text x="250" y="125" text-anchor="middle">html</text>
+                
+                <!-- head and body -->
+                <rect x="100" y="180" width="100" height="40" rx="5" fill="#e5e7eb"/>
+                <text x="150" y="205" text-anchor="middle">head</text>
+                
+                <rect x="300" y="180" width="100" height="40" rx="5" fill="#e5e7eb"/>
+                <text x="350" y="205" text-anchor="middle">body</text>
+                
+                <!-- Connections -->
+                <path d="M 250 60 L 250 100" stroke="#4b5563" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <path d="M 250 140 L 150 180" stroke="#4b5563" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <path d="M 250 140 L 350 180" stroke="#4b5563" stroke-width="2" marker-end="url(#arrowhead)"/>
+            </svg>
+
+            <div class="code-demo">
+                <div data-lang="en"><h3>🔨 DOM Manipulation Demo</h3></div>
+                <div data-lang="vi"><h3>🔨 Demo Thao Tác DOM</h3></div>
+                <button class="run-button" onclick="runDOMDemo()">▶️ Run</button>
+                <pre><code><span class="comment">// DOM manipulation example</span>
+<span class="keyword">const</span> div = document.createElement(<span class="string">'div'</span>);
+div.textContent = <span class="string">'DOM has been manipulated!'</span>;
+div.style.color = <span class="string">'blue'</span>;
+document.getElementById(<span class="string">'demo-output'</span>).appendChild(div);</code></pre>
+                <div id="demo-output" class="demo-output"></div>
+            </div>
+        </section>
+
+        <section>
+            <div data-lang="en">
+                <h2>React: The Magical DOM Manager ✨</h2>
+                <p>React manages the DOM for us, making everything faster and easier!</p>
+            </div>
+            <div data-lang="vi">
+                <h2>React: Người Quản Lý DOM Thần Kỳ ✨</h2>
+                <p>React quản lý DOM thay cho chúng ta, làm mọi thứ nhanh hơn và dễ dàng hơn!</p>
+            </div>
+
+            <div class="collapsible open">
+                <div class="collapsible-header">
+                    <div data-lang="en">🚀 Why React is Different</div>
+                    <div data-lang="vi">🚀 Tại Sao React Khác Biệt</div>
+                </div>
+                <div class="collapsible-content">
+                    <pre><code><span class="comment">// Traditional way</span>
+document.getElementById(<span class="string">'myButton'</span>).addEventListener(<span class="string">'click'</span>, () => {
+    document.getElementById(<span class="string">'myDiv'</span>).innerHTML = <span class="string">'Clicked!'</span>;
+});
+
+<span class="comment">// React way</span>
+<span class="keyword">function</span> <span class="function">MyComponent</span>() {
+    <span class="keyword">const</span> [clicks, setClicks] = useState(<span class="number">0</span>);
+    <span class="keyword">return</span> (
+        &lt;button onClick={() => setClicks(clicks + <span class="number">1</span>)}&gt;
+            {clicks === <span class="number">0</span> ? <span class="string">"Click me"</span> : <span class="string"><span class="interpolation">`</span>Clicked <span class="interpolation">${</span><span class="black">clicks</span><span class="interpolation">}</span> time<span class="interpolation">${</span><span class="black">clicks === 1 ?</span> '' <span class="black">:</span> 's'<span class="interpolation">}</span>!<span class="interpolation">`</span></span>}
+        &lt;/button&gt;
+    );
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="demo-grid">
+                <div class="demo-col">
+                    <div data-lang="en"><h3>Traditional Way</h3></div>
+                    <div data-lang="vi"><h3>Cách Truyền Thống</h3></div>
+                    <div class="demo-container">
+                        <button id="traditionalBtn">Click me</button>
+                        <div id="myDiv">Not clicked yet</div>
+                    </div>
+                </div>
+
+                <div class="demo-col">
+                    <div data-lang="en"><h3>React Way</h3></div>
+                    <div data-lang="vi"><h3>Cách React</h3></div>
+                    <div class="demo-container">
+                        <button id="reactBtn">Click me</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div data-lang="en">
+                <h2>State Management: The Right Way 🧠</h2>
+                <p>Using state correctly is crucial in React. Here's why:</p>
+            </div>
+            <div data-lang="vi">
+                <h2>Quản Lý State: Cách Đúng 🧠</h2>
+                <p>Sử dụng state đúng cách là rất quan trọng trong React. Đây là lý do tại sao:</p>
+            </div>
+        
+            <div class="code-demo">
+                <div data-lang="en"><h3>❌ Common Mistake</h3></div>
+                <div data-lang="vi"><h3>❌ Lỗi Thường Gặp</h3></div>
+                <pre><code><span class="comment">// DON'T DO THIS!</span>
+<span class="keyword">let</span> items = [];  <span class="comment">// Global variable - React can't track changes!</span>
+
+<span class="keyword">function</span> <span class="function">ShoppingList</span>() {
+    <span class="keyword">return</span> (
+        &lt;div&gt;
+            {items.map(<span class="keyword">item</span> => &lt;li&gt;{item}&lt;/li&gt;)}
+        &lt;/div&gt;
+    );
+}</code></pre>
+            </div>
+        
+            <div class="code-demo">
+                <div data-lang="en"><h3>✅ Correct Way</h3></div>
+                <div data-lang="vi"><h3>✅ Cách Đúng</h3></div>
+                <pre><code><span class="keyword">function</span> <span class="function">ShoppingList</span>() {
+    <span class="keyword">const</span> [items, setItems] = useState([]);  <span class="comment">// Initializes the state to an empty array</span>
+    
+    <span class="comment">// TODO: Fetch data from server and call setItems, passing in the fetched data (you need to use useEffect)</span>
+
+    <span class="keyword">return</span> (
+        &lt;div&gt;
+            {items.map(<span class="keyword">item</span> => &lt;li&gt;{item}&lt;/li&gt;)}
+        &lt;/div&gt;
+    );
+}</code></pre>
+            </div>
+        </section>
+
+    </div>
+    
+    <script>
+        // Language toggle
+        document.querySelectorAll('input[name="language"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const selectedLang = e.target.value;
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    el.classList.toggle('active', el.dataset.lang === selectedLang);
+                });
+            });
+        });
+
+        // Initialize English
+        document.querySelectorAll('[data-lang="en"]').forEach(el => {
+            el.classList.add('active');
+        });
+
+        // Collapsible functionality
+        document.querySelectorAll('.collapsible-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.parentElement.classList.toggle('open');
+            });
+        });
+
+        // Traditional way - follows the first code example exactly
+        document.getElementById('traditionalBtn').addEventListener('click', () => {
+            document.getElementById('myDiv').innerHTML = 'Clicked!';
+        });
+
+        // React way - implements a counter to show state changes
+        let clickCount = 0;
+        const reactBtn = document.getElementById('reactBtn');
+        reactBtn.addEventListener('click', () => {
+            clickCount++;
+            reactBtn.textContent = `Clicked ${clickCount} time${clickCount === 1 ? '' : 's'}!`;
+        });
+        
+        // DOM Demo
+        function runDOMDemo() {
+            const output = document.getElementById('demo-output');
+            output.innerHTML = '';
+            const div = document.createElement('div');
+            div.textContent = 'Hello World!';
+            div.style.color = 'blue';
+            output.appendChild(div);
+        }
+    </script>
+</body>
+</html>
