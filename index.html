@@ -302,7 +302,7 @@ document.getElementById(<span class="string">'myButton'</span>).addEventListener
 
 <span class="comment">// React way</span>
 <span class="keyword">function</span> <span class="function">MyComponent</span>() {
-    <span class="keyword">const</span> [clicks, setClicks] = useState(<span class="number">0</span>);
+    <span class="keyword">const</span> [clicks, setClicks] = useState(<span class="number">0</span>);  <span class="comment">// Initialize number of clicks to zero (0)</span>
     <span class="keyword">return</span> (
         &lt;button onClick={() => setClicks(clicks + <span class="number">1</span>)}&gt;
             {clicks === <span class="number">0</span> ? <span class="string">"Click me"</span> : <span class="string"><span class="interpolation">`</span>Clicked <span class="interpolation">${</span><span class="black">clicks</span><span class="interpolation">}</span> time<span class="interpolation">${</span><span class="black">clicks === 1 ?</span> '' <span class="black">:</span> 's'<span class="interpolation">}</span>!<span class="interpolation">`</span></span>}
