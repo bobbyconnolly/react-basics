@@ -180,6 +180,15 @@
             background-color: #1d4ed8;
         }
 
+        ol {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        ol li {
+            margin: 0.5rem 0;
+        }
+
         #myDiv {
             margin-top: 1rem;
             padding: 0.5rem;
@@ -371,6 +380,54 @@ document.getElementById(<span class="string">'myButton'</span>).addEventListener
         &lt;/div&gt;
     );
 }</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <div data-lang="en">
+                <h2>Starting Up React: The Grand Opening 🎬</h2>
+                <p>Every React app needs a starting point. Think of it like turning on the engine of your car:</p>
+            </div>
+            <div data-lang="vi">
+                <h2>Khởi Động React: Buổi Khai Trương 🎬</h2>
+                <p>Mọi ứng dụng React đều cần một điểm khởi đầu. Hãy tưởng tượng nó giống như khởi động động cơ xe của bạn:</p>
+            </div>
+        
+            <div class="code-demo">
+                <pre><code><span class="keyword">import</span> { createRoot } <span class="keyword">from</span> <span class="string">'react-dom/client'</span>;
+        
+<span class="comment">// Find our parking spot (the root div)</span>
+<span class="keyword">const</span> container = document.getElementById(<span class="string">'root'</span>);
+<span class="keyword">const</span> root = createRoot(container);
+
+<span class="comment">// Start the engine!</span>
+root.render(&lt;App /&gt;);</code></pre>
+            </div>
+        
+            <div data-lang="en">
+                <p>When we say React "renders," imagine it's like a super-fast artist drawing your UI. Every time something changes (like when you click a button or type in a form), React looks at what needs to be updated and redraws just those parts - not the whole page! This is why React is so efficient.</p>
+                
+                <p>The process goes like this:</p>
+                <ol>
+                    <li>Component's state changes (maybe someone clicked a button)</li>
+                    <li>React creates a new "virtual" drawing of how things should look</li>
+                    <li>React compares this with what's currently shown</li>
+                    <li>React updates only the parts that are different</li>
+                </ol>
+                <p>This is why we love React - it handles all the complex DOM updates for us, while we focus on building awesome features! 🚀</p>
+            </div>
+        
+            <div data-lang="vi">
+                <p>Khi chúng ta nói React "renders," hãy tưởng tượng nó như một họa sĩ vẽ giao diện người dùng của bạn với tốc độ siêu nhanh. Mỗi khi có thay đổi (như khi bạn nhấp vào nút hoặc nhập vào form), React xem xét những gì cần được cập nhật và chỉ vẽ lại những phần đó - không phải toàn bộ trang! Đây là lý do tại sao React hiệu quả như vậy.</p>
+                
+                <p>Quá trình diễn ra như sau:</p>
+                <ol>
+                    <li>State của component thay đổi (có thể ai đó đã nhấp vào nút)</li>
+                    <li>React tạo một bản vẽ "ảo" mới về cách mọi thứ nên trông như thế nào</li>
+                    <li>React so sánh bản vẽ này với những gì đang được hiện thị</li>
+                    <li>React chỉ cập nhật những phần khác biệt</li>
+                </ol>
+                <p>Đây là lý do tại sao chúng ta yêu thích React - nó xử lý tất cả các cập nhật DOM phức tạp cho chúng ta, trong khi chúng ta tập trung vào việc xây dựng các tính năng tuyệt vời! 🚀</p>
             </div>
         </section>
 
